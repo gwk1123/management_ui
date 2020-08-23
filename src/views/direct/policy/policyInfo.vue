@@ -288,16 +288,16 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="是否混合航司" prop="permitCodeShare" label-width="150px">
-              <el-input v-model="form.permitCodeShare" placeholder="请输入数字" width="100px" />
+            <el-form-item label="是否混合航司" prop="permitInterline" label-width="150px">
+              <el-input v-model="form.permitInterline" placeholder="请输入数字" width="100px" />
             </el-form-item>
           </el-col>
         </el-row>
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="混合航司" prop="codeShareAirline" label-width="150px">
-              <el-input v-model="form.codeShareAirline" placeholder="请输入大写字母" width="100px" />
+            <el-form-item label="混合航司" prop="interlineAirline" label-width="150px">
+              <el-input v-model="form.interlineAirline" placeholder="请输入大写字母" width="100px" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -636,14 +636,63 @@
       // 表单重置
       reset() {
         this.form = {
+          bookOfficeNo: undefined,
+          bookGdsChannel: undefined,
+          productType: undefined,
+          tripType: undefined,
+          airline: undefined,
           depCity: undefined,
           arrCity: undefined,
-          bothWaysFlag: undefined,
-          searchOfficeNo: undefined,
-          verifyOfficeNo: undefined,
-          orderOfficeNo: undefined,
-          status: "0",
-          remark: undefined
+          depCityExcept: undefined,
+          arrCityExcept: undefined,
+          interlineAirline: undefined,
+          interlineAirlineExcept: undefined,
+          permitTransit: undefined,
+          transferPoint: undefined,
+          permitCodeShare: undefined,
+          permitInterline: undefined,
+          invoiceType: undefined,
+          outboundDateStart: undefined,
+          outboundDateEnd: undefined,
+          inboundDateStart: undefined,
+          inboundDateEnd: undefined,
+          saleDateStart: undefined,
+          saleDateEnd: undefined,
+          outboundDayTime: undefined,
+          inboundDayTime: undefined,
+          outboundTravelDateExcept: undefined,
+          inboundTravelDateExcept: undefined,
+          seatGrade: undefined,
+          seatCabin: undefined,
+          seatCabinExcept: undefined,
+          commition: undefined,
+          adultPrice: undefined,
+          adultTax: undefined,
+          childPriceType: undefined,
+          childDiscount: undefined,
+          ticketRemark: undefined,
+          ticketDeadline: undefined,
+          nationality: undefined,
+          excludeNationality: undefined,
+          priceType: undefined,
+          ticketRuleNotes: undefined,
+          remark: undefined,
+          baggageType: undefined,
+          manualAdultPrice: undefined,
+          manualAdultTax: undefined,
+          prohibitedFlight: undefined,
+          availableFlight: undefined,
+          advanceSaleDay: undefined,
+          manualSeatCabin: undefined,
+          codeShareAirline: undefined,
+          codeShareAirlineExcept: undefined,
+          retMaxTime: undefined,
+          retMinTime: undefined,
+          adultBaggagePieces: undefined,
+          adultBaggageWeight: undefined,
+          childBaggagePieces: undefined,
+          childBaggageWeight: undefined,
+          status: "0"
         };
         this.resetForm("form");
       },
