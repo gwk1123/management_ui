@@ -111,8 +111,8 @@
     <!-- 添加或修改参数配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="字典类型">
-          <el-input v-model="form.dictType" :disabled="false" />
+        <el-form-item label="字典类型" prop="dictType" >
+          <el-input v-model="form.dictType" placeholder="请输入字典类型" />
         </el-form-item>
         <el-form-item label="数据标签" prop="dictLabel">
           <el-input v-model="form.dictLabel" placeholder="请输入数据标签" />
