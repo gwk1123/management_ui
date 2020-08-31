@@ -30,3 +30,29 @@ npm run build:prod
 ```
 
 # 项目部署参考文献  https://mp.weixin.qq.com/s/9Iw6gaGdLMbs3Ai3JB6nig
+
+# nginx:
+
+# http {
+    include mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+ # server {
+    listen 80; # 监听的端口
+    server_name 自己的服务器地址; # 域名或ip    
+    location / {  # 访问路径配置
+      root /usr/local/ruoyi/dist/;# 根目录
+      try_files $uri $uri/ /index.html;
+      index index.html index.htm; # 默认首页
+    }        
+    location /prod-api/ {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header REMOTE-HOST $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_pass http://localhost:8080/; # 后台地址
+    }       
+#  }
+# }
+
