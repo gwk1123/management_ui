@@ -28,3 +28,5 @@ npm run build:stage
 # 构建生产环境
 npm run build:prod
 ```
+
+# 项目部署参考文献  https://mp.weixin.qq.com/s/9Iw6gaGdLMbs3Ai3JB6nig
