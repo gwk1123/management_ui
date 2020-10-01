@@ -440,6 +440,7 @@
         title: "",
         // 是否显示弹出层
         open: false,
+        ruleOptions: [],
         // 日期范围
         dateRange: [],
         // 状态数据字典
@@ -467,6 +468,9 @@
     },
     created() {
       this.getList();
+      this.getDicts("direct_rule_gds").then(response => {
+        this.ruleOptions = response.data;
+      });
       this.getDicts("sys_normal_disable").then(response => {
         this.statusOptions = response.data;
       });
@@ -544,7 +548,7 @@
       handleAdd() {
         this.reset();
         this.open = true;
-        this.title = "添加角色";
+        this.title = "添加GDS规则";
       },
       /** 修改按钮操作 */
       handleUpdate(row) {
@@ -553,7 +557,7 @@
         getGdsRule(id).then(response => {
           this.form = response.data;
           this.open = true;
-          this.title = "修改角色";
+          this.title = "修改GDS规则";
         });
       },
       /** 提交按钮 */

@@ -5,7 +5,7 @@
       <el-form-item label="状态" prop="status">
         <el-select
           v-model="queryParams.status"
-          placeholder="GDS状态"
+          placeholder="数据状态"
           clearable
           size="small"
           style="width: 240px"
@@ -143,7 +143,7 @@
   import { listSiteRulesSwitch, getSiteRulesSwitch, delSiteRulesSwitch, addSiteRulesSwitch, updateSiteRulesSwitch, changeSiteRulesSwitchStatus } from "@/api/direct/gds/siteRulesSwitch";
 
   export default {
-    name: "Ota",
+    name: "SiteRulesSwitch",
     data() {
       return {
         // 遮罩层
