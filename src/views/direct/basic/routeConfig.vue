@@ -89,8 +89,8 @@
     <el-table v-loading="loading" :data="routeConfigList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" prop="id" width="70" />
-      <el-table-column label="出发地" prop="deptCity" width="100" />
-      <el-table-column label="目的地" prop="arrCity" width="100" />
+      <el-table-column label="出发地" prop="origin" width="100" />
+      <el-table-column label="目的地" prop="destination" width="100" />
       <el-table-column label="双向标识" prop="bothWaysFlag" width="80" />
       <el-table-column label="search配置号" prop="searchOfficeNo" width="150" />
       <el-table-column label="verify配置号" prop="verifyOfficeNo" width="150" />
@@ -141,11 +141,11 @@
     <!-- 添加或修改角色配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="出发地" prop="deptCity">
-          <el-input v-model="form.depCity" placeholder="请输入大写字母" />
+        <el-form-item label="出发地" prop="origin">
+          <el-input v-model="form.origin" placeholder="请输入大写字母" />
         </el-form-item>
-        <el-form-item label="目的地" prop="arrCity">
-          <el-input v-model="form.arrCity" placeholder="请输入大写字母" />
+        <el-form-item label="目的地" prop="destination">
+          <el-input v-model="form.destination" placeholder="请输入大写字母" />
         </el-form-item>
         <el-form-item label="双向标识" prop="bothWaysFlag">
           <el-input v-model="form.bothWaysFlag" placeholder="只能录入1或2" />
