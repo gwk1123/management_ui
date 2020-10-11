@@ -70,12 +70,12 @@
 
 
     <el-table v-loading="loading" :data="gdsSearchList" >
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" prop="id" width="120" />
-      <el-table-column label="Key分组" prop="groupKey" width="100" />
-      <el-table-column label="键" prop="parameterKey" width="100" />
-      <el-table-column label="参数名称" prop="parameterName" width="100" />
-      <el-table-column label="值" prop="parameterValue" width="100" />
+      <el-table-column label="航段信息" prop="segmentInfo" width="300" />
+      <el-table-column
+        v-for="col in cols"
+        :prop="col.prop" :label="col.label" >
+      </el-table-column>
+
     </el-table>
 
   </div>
@@ -100,6 +100,7 @@
         showSearch: true,
         // OTA表格数据
         gdsSearchList: [],
+        cols: [],
         // 弹出层标题
         open: false,
         // 查询参数
@@ -125,7 +126,21 @@
         listGdsSearch(this.queryParams).then(
           responseData => {
             const response = responseData.data;
-            this.gdsSearchList = response;
+            const list = response.localSiteSearchVoMap;
+            for(const key in list){
+              const item = {};
+              item.segmentInfo = key;
+              this.gdsSearchList.push(item);
+            }
+
+            this.cols = [];
+            const gdsInfoList = response.localGdsSearchVo;
+            const gdsList = gdsInfoList.gdsSource;
+            const otaSiteList = gdsInfoList.otaSite;
+            const gdsOtaList = gdsList.concat(otaSiteList);
+            for(const  key in gdsOtaList){
+              this.cols.push({prop: gdsOtaList[key], label: gdsOtaList[key]});
+            }
             this.loading = false;
           }
         );
