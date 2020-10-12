@@ -70,6 +70,12 @@
 
 
     <el-table v-loading="loading" :data="gdsSearchList" >
+      <el-table-column
+        label="序号"
+        type="index"
+        width="50"
+        align="center">
+      </el-table-column>
       <el-table-column label="航段信息" prop="segmentInfo" width="300" />
       <el-table-column
         v-for="col in cols"
@@ -122,6 +128,7 @@
     methods: {
       /** 查询角色列表 */
       getList() {
+        this.gdsSearchList = [];
         this.loading = true;
         listGdsSearch(this.queryParams).then(
           responseData => {
@@ -129,10 +136,36 @@
             const list = response.localSiteSearchVoMap;
             for(const key in list){
               const item = {};
+              //航段信息
               item.segmentInfo = key;
+
+              //GDS信息
+              const gdsDataList = list[key].gdsInfoVos;
+              for(const i in gdsDataList){
+                const gdsItem = gdsDataList[i];
+                const gdsHtmlStr = "<div>"+
+                  "<br>"+"GDS票面价"+gdsItem.adultPriceGds+"</br>"+
+                  "<br>"+"GDS税费"+gdsItem.adultTaxGds+"</br>"+
+                  "</div>";
+                const gdsPcc = gdsItem.gds+"-"+gdsItem.pcc;
+                item[gdsPcc] = gdsHtmlStr;
+              }
+
+              //站点信息
+              const otaSiteDataList = list[key].siteInfoVos;
+              for(const j in otaSiteDataList){
+                const otaItem = otaSiteDataList[j];
+                const otaHtmlStr = "<div>"+
+                  "<br>"+"OTA票面价"+otaItem.adultPriceOta+"</br>"+
+                  "<br>"+"OTA税费"+otaItem.adultTaxOta+"</br>"+
+                  "</div>";
+                const site = otaItem.site;
+                item[site] = otaHtmlStr;
+              }
               this.gdsSearchList.push(item);
             }
 
+            //加载表头信息
             this.cols = [];
             const gdsInfoList = response.localGdsSearchVo;
             const gdsList = gdsInfoList.gdsSource;
@@ -153,18 +186,6 @@
       cancel() {
         this.open = false;
         this.reset();
-      },
-      // 表单重置
-      reset() {
-        this.form = {
-          groupKey: undefined,
-          parameterKey: undefined,
-          parameterName: undefined,
-          parameterValue: undefined,
-          status: "0",
-          remark: undefined
-        };
-        this.resetForm("form");
       },
       /** 重置按钮操作 */
       resetQuery() {
