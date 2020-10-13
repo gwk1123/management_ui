@@ -123,7 +123,14 @@
       };
     },
     created() {
-      this.getList();
+      if( this.queryParams.tripType ==undefined || this.queryParams.fromCity ==undefined
+      || this.queryParams.toCity ==undefined || this.queryParams.fromDate ==undefined ||
+        this.queryParams.otaSites ==undefined ){
+        this.gdsSearchList = [];
+        return ;
+      }else {
+        this.getList();
+      }
     },
     methods: {
       /** 查询角色列表 */

@@ -254,9 +254,27 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="是否中转" prop="permitTransit" label-width="150px">
-              <el-input v-model="form.permitTransit" placeholder="请输入数字" width="100px" />
+<!--            <el-form-item label="是否中转" prop="permitTransit" label-width="150px">-->
+<!--              <el-input v-model="form.permitTransit" placeholder="请输入数字" width="100px" />-->
+<!--            </el-form-item>-->
+
+            <el-form-item label="是否中转" prop="permitTransit">
+              <el-select
+                v-model="form.permitTransit"
+                placeholder="请选择下拉选择"
+                clearable
+                size="small"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="dict in directPolicyPermitOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
             </el-form-item>
+
           </el-col>
           <el-col :span="12">
             <el-form-item label="指定转机点" prop="transferPoint" label-width="150px">
@@ -564,6 +582,7 @@
         dateRange: [],
         // 状态数据字典
         statusOptions: [],
+        directPolicyPermitOptions: [],
         // 查询参数
         queryParams: {
           current: 1,
@@ -598,6 +617,9 @@
       this.getList();
       this.getDicts("sys_normal_disable").then(response => {
         this.statusOptions = response.data;
+      });
+      this.getDicts("direct_policy_permit").then(response => {
+        this.directPolicyPermitOptions = response.data;
       });
     },
     methods: {
