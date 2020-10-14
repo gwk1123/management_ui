@@ -60,9 +60,9 @@
     <el-table v-loading="loading" :data="siteRulesSwitchList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" prop="id" width="120" />
-      <el-table-column label="Key分组" prop="groupKey" width="100" />
-      <el-table-column label="键" prop="parameterKey" width="100" />
-      <el-table-column label="参数名称" prop="parameterName" width="100" />
+      <el-table-column label="Key分组" prop="groupKey" width="300" />
+      <el-table-column label="键" prop="parameterKey" width="150" />
+      <el-table-column label="参数名称" prop="parameterName" width="200" />
       <el-table-column label="值" prop="parameterValue" width="100" />
       <el-table-column label="状态" align="center" width="100">
         <template slot-scope="scope">

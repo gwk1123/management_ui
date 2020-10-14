@@ -128,7 +128,7 @@
           ></el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="150">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -181,8 +181,21 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="行程类型" prop="tripType" label-width="150px">
-              <el-input v-model="form.tripType" placeholder="请输入大写字母" width="100px" />
+            <el-form-item label="行程类型" prop="tripType">
+              <el-select
+                v-model="form.tripType"
+                placeholder="请选择下拉选择"
+                clearable
+                size="small"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="dict in sibeTripTypeOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -285,8 +298,21 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="是否共享航司" prop="permitCodeShare" label-width="150px">
-              <el-input v-model="form.permitCodeShare" placeholder="请输入数字" width="100px" />
+            <el-form-item label="是否共享航司" prop="permitCodeShare">
+              <el-select
+                v-model="form.permitCodeShare"
+                placeholder="请选择下拉选择"
+                clearable
+                size="small"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="dict in directPolicyPermitOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -306,8 +332,21 @@
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="是否混合航司" prop="permitInterline" label-width="150px">
-              <el-input v-model="form.permitInterline" placeholder="请输入数字" width="100px" />
+            <el-form-item label="是否混合航司" prop="permitInterline">
+              <el-select
+                v-model="form.permitInterline"
+                placeholder="请选择下拉选择"
+                clearable
+                size="small"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="dict in directPolicyPermitOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -404,13 +443,39 @@
         <el-divider>运价信息</el-divider>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="产品类型" prop="productType" label-width="150px">
-              <el-input v-model="form.productType" placeholder="请输入数字" width="300px" />
+            <el-form-item label="产品类型" prop="productType">
+              <el-select
+                v-model="form.productType"
+                placeholder="请选择下拉选择"
+                clearable
+                size="small"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="dict in sibeProductTypeOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="运价类型" prop="priceType" label-width="150px">
-              <el-input v-model="form.priceType" placeholder="请输入数字" width="300px" />
+            <el-form-item label="运价类型" prop="priceType">
+              <el-select
+                v-model="form.priceType"
+                placeholder="请选择下拉选择"
+                clearable
+                size="small"
+                style="width: 240px"
+              >
+                <el-option
+                  v-for="dict in sibePriceTypeOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -583,6 +648,9 @@
         // 状态数据字典
         statusOptions: [],
         directPolicyPermitOptions: [],
+        sibeTripTypeOptions: [],
+        sibePriceTypeOptions: [],
+        sibeProductTypeOptions: [],
         // 查询参数
         queryParams: {
           current: 1,
@@ -620,6 +688,15 @@
       });
       this.getDicts("direct_policy_permit").then(response => {
         this.directPolicyPermitOptions = response.data;
+      });
+      this.getDicts("sibe_trip_type").then(response => {
+        this.sibeTripTypeOptions = response.data;
+      });
+      this.getDicts("sibe_price_type").then(response => {
+        this.sibePriceTypeOptions = response.data;
+      });
+      this.getDicts("sibe_product_type").then(response => {
+        this.sibeProductTypeOptions = response.data;
       });
     },
     methods: {
@@ -661,7 +738,7 @@
           bookOfficeNo: undefined,
           bookGdsChannel: undefined,
           productType: undefined,
-          tripType: undefined,
+          tripType: "3",
           airline: undefined,
           depCity: undefined,
           arrCity: undefined,
@@ -669,10 +746,10 @@
           arrCityExcept: undefined,
           interlineAirline: undefined,
           interlineAirlineExcept: undefined,
-          permitTransit: undefined,
+          permitTransit: "3",
           transferPoint: undefined,
-          permitCodeShare: undefined,
-          permitInterline: undefined,
+          permitCodeShare: "3",
+          permitInterline: "3",
           invoiceType: undefined,
           outboundDateStart: undefined,
           outboundDateEnd: undefined,
@@ -696,7 +773,8 @@
           ticketDeadline: undefined,
           nationality: undefined,
           excludeNationality: undefined,
-          priceType: undefined,
+          priceType: "3",
+          productType: "1",
           ticketRuleNotes: undefined,
           remark: undefined,
           baggageType: undefined,
@@ -747,6 +825,12 @@
         const id = row.id || this.ids;
         getPolicyInfo(id).then(response => {
           this.form = response.data;
+          this.form.permitTransit = this.form.permitTransit.toString();
+          this.form.permitCodeShare = this.form.permitCodeShare.toString();
+          this.form.tripType = this.form.tripType.toString();
+          this.form.permitInterline = this.form.permitInterline.toString();
+          this.form.priceType = this.form.priceType.toString();
+          this.form.productType = this.form.productType.toString();
           this.open = true;
           this.title = "修改明细政策";
         });
