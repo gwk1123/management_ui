@@ -42,7 +42,7 @@
       <el-form-item label="状态" prop="status">
         <el-select
           v-model="queryParams.status"
-          placeholder="路由状态"
+          placeholder="状态"
           clearable
           size="small"
           style="width: 240px"
@@ -267,10 +267,6 @@
 
         <el-row>
           <el-col :span="12">
-<!--            <el-form-item label="是否中转" prop="permitTransit" label-width="150px">-->
-<!--              <el-input v-model="form.permitTransit" placeholder="请输入数字" width="100px" />-->
-<!--            </el-form-item>-->
-
             <el-form-item label="是否中转" prop="permitTransit">
               <el-select
                 v-model="form.permitTransit"

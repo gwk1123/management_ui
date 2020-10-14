@@ -2,16 +2,24 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" v-show="showSearch" :inline="true">
 
-
       <el-form-item label="行程类型" prop="tripType">
-        <el-input
+        <el-select
           v-model="queryParams.tripType"
-          placeholder="请输入行程类型"
+          placeholder="请选择行程类型"
           clearable
           size="small"
           style="width: 240px"
-        />
+        >
+          <el-option
+            v-for="dict in sibeTripTypeOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
+        </el-select>
       </el-form-item>
+
+
       <el-form-item label="出发地" prop="fromCity">
         <el-input
           v-model="queryParams.fromCity"
@@ -32,24 +40,17 @@
         />
       </el-form-item>
       <el-form-item label="出发日期" prop="fromDate">
-        <el-input
-          v-model="queryParams.fromDate"
-          placeholder="请输入出发日期"
-          clearable
-          size="small"
-          style="width: 240px"
-        />
+          <el-date-picker v-model="queryParams.fromDate" format="yyyyMMdd" value-format="yyyyMMdd"
+             :style="{width: '100%'}" placeholder="请选择日期选择" clearable></el-date-picker>
       </el-form-item>
 
-      <el-form-item label="回程日期" prop="retDate">
-        <el-input
-          v-model="queryParams.retDate"
-          placeholder="请输入回程日期"
-          clearable
-          size="small"
-          style="width: 240px"
-        />
+      <el-form-item v-show ="this.queryParams.tripType =='2' ">
+        <el-form-item label="回程日期" prop="retDate" >
+          <el-date-picker v-model="queryParams.retDate" format="yyyyMMdd" value-format="yyyyMMdd"
+                          :style="{width: '100%'}" placeholder="请选择日期选择" clearable></el-date-picker>
+        </el-form-item>
       </el-form-item>
+
       <el-form-item label="站点" prop="otaSites">
         <el-input
           v-model="queryParams.otaSites"
@@ -106,12 +107,13 @@
         showSearch: true,
         // OTA表格数据
         gdsSearchList: [],
+        sibeTripTypeOptions: [],
         cols: [],
         // 弹出层标题
         open: false,
         // 查询参数
         queryParams: {
-          tripType: undefined,
+          tripType: "1",
           fromCity: undefined,
           toCity: undefined,
           fromDate: undefined,
@@ -123,6 +125,9 @@
       };
     },
     created() {
+      this.getDicts("sibe_trip_type").then(response => {
+        this.sibeTripTypeOptions = response.data;
+      });
       if( this.queryParams.tripType ==undefined || this.queryParams.fromCity ==undefined
       || this.queryParams.toCity ==undefined || this.queryParams.fromDate ==undefined ||
         this.queryParams.otaSites ==undefined ){
