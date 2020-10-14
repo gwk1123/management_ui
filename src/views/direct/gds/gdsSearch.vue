@@ -8,7 +8,7 @@
           placeholder="请选择行程类型"
           clearable
           size="small"
-          style="width: 240px"
+          style="width: 150px"
         >
           <el-option
             v-for="dict in sibeTripTypeOptions"
@@ -26,7 +26,7 @@
           placeholder="请输入出发地"
           clearable
           size="small"
-          style="width: 240px"
+          style="width: 150px"
         />
       </el-form-item>
 
@@ -36,18 +36,18 @@
           placeholder="请输入目的地"
           clearable
           size="small"
-          style="width: 240px"
+          style="width: 150px"
         />
       </el-form-item>
       <el-form-item label="出发日期" prop="fromDate">
           <el-date-picker v-model="queryParams.fromDate" format="yyyyMMdd" value-format="yyyyMMdd"
-             :style="{width: '100%'}" placeholder="请选择日期选择" clearable></el-date-picker>
+             :style="{width: '80%'}" placeholder="请选择日期选择" clearable></el-date-picker>
       </el-form-item>
 
       <el-form-item v-show ="this.queryParams.tripType =='2' ">
         <el-form-item label="回程日期" prop="retDate" >
           <el-date-picker v-model="queryParams.retDate" format="yyyyMMdd" value-format="yyyyMMdd"
-                          :style="{width: '100%'}" placeholder="请选择日期选择" clearable></el-date-picker>
+                          :style="{width: '80%'}" placeholder="请选择日期选择" clearable></el-date-picker>
         </el-form-item>
       </el-form-item>
 
@@ -57,7 +57,7 @@
           placeholder="请输入站点"
           clearable
           size="small"
-          style="width: 240px"
+          style="width: 150px"
         />
       </el-form-item>
 
