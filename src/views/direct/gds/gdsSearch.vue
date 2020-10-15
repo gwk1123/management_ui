@@ -81,6 +81,9 @@
       <el-table-column
         v-for="col in cols"
         :prop="col.prop" :label="col.label" >
+        <template slot-scope="scope">
+          <p v-html='scope.row[col.prop]'></p>
+        </template>
       </el-table-column>
 
     </el-table>
