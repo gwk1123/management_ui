@@ -41,13 +41,13 @@
       </el-form-item>
       <el-form-item label="出发日期" prop="fromDate">
           <el-date-picker v-model="queryParams.fromDate" format="yyyyMMdd" value-format="yyyyMMdd"
-             :style="{width: '80%'}" placeholder="请选择日期选择" clearable></el-date-picker>
+             :style="{width: '70%'}" placeholder="请选择日期选择" clearable></el-date-picker>
       </el-form-item>
 
       <el-form-item v-show ="this.queryParams.tripType =='2' ">
         <el-form-item label="回程日期" prop="retDate" >
           <el-date-picker v-model="queryParams.retDate" format="yyyyMMdd" value-format="yyyyMMdd"
-                          :style="{width: '80%'}" placeholder="请选择日期选择" clearable></el-date-picker>
+                          :style="{width: '70%'}" placeholder="请选择日期选择" clearable></el-date-picker>
         </el-form-item>
       </el-form-item>
 
@@ -70,7 +70,8 @@
     </el-form>
 
 
-    <el-table v-loading="loading" :data="gdsSearchList" >
+    <el-table v-loading="loading" :data="gdsSearchList" border style="width:100%"
+              :header-cell-style="{'text-align':'center'}" :cell-style="set_cell_style">
       <el-table-column
         label="序号"
         type="index"
@@ -141,6 +142,15 @@
       }
     },
     methods: {
+      set_cell_style({row, column, rowIndex, columnIndex}) {
+        // console.log(row, "row")
+        if (column.label === 'CT001') {
+          return column.label = '携程一部';
+        }
+        if (column.label === 'CT002') {
+          return column.label = '携程二部';
+        }
+      },
       /** 查询角色列表 */
       getList() {
         this.gdsSearchList = [];
