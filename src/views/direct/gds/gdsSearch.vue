@@ -78,7 +78,7 @@
         width="50"
         align="center">
       </el-table-column>
-      <el-table-column label="航段信息" prop="segmentInfo" width="500" >
+      <el-table-column label="航段信息" prop="segmentInfo" width="450" >
         <template slot-scope="scope">
           <p v-html='scope.row.segmentInfo'></p>
         </template>
@@ -169,7 +169,7 @@
               item.segmentInfo ='';
 
               let html = '';
-               html = ' <table>' +
+               html = '<table style="font-size:5px;">' +
                 '<thead>' +
                 '<tr>' +
                 '<th>航程类型</th>' +
@@ -224,8 +224,10 @@
               for(const i in gdsDataList){
                 const gdsItem = gdsDataList[i];
                 const gdsHtmlStr = "<div>"+
-                  "<br>"+"GDS票面价"+gdsItem.adultPriceGds+"</br>"+
-                  "<br>"+"GDS税费"+gdsItem.adultTaxGds+"</br>"+
+                  "<p>"+"票面价: "+gdsItem.adultPriceGds+
+                  "<br/>"+"税费: "+gdsItem.adultTaxGds+
+                  "<br/>"+"运价类型: "+gdsItem.adultPriceGds+
+                  "<br/>"+"行李额: "+gdsItem.adultTaxGds+"</p>"+
                   "</div>";
                 const gdsPcc = gdsItem.gds+"-"+gdsItem.pcc;
                 item[gdsPcc] = gdsHtmlStr;
@@ -236,8 +238,10 @@
               for(const j in otaSiteDataList){
                 const otaItem = otaSiteDataList[j];
                 const otaHtmlStr = "<div>"+
-                  "<br>"+"OTA票面价"+otaItem.adultPriceOta+"</br>"+
-                  "<br>"+"OTA税费"+otaItem.adultTaxOta+"</br>"+
+                  "<p>"+"票面价: "+otaItem.adultPriceOta+
+                  "<br/>"+"税费: "+otaItem.adultTaxOta+
+                  "<br/>"+"来源: "+otaItem.gds + '-'+otaItem.pcc +
+                  "<br/>"+"行李额: "+otaItem.baggageInfo+"</p>"+
                   "</div>";
                 const site = otaItem.site;
                 item[site] = otaHtmlStr;
