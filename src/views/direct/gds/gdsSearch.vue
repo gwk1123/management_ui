@@ -172,6 +172,7 @@
                html = ' <table>' +
                 '<thead>' +
                 '<tr>' +
+                '<th>航程类型</th>' +
                 '<th>航司</th>' +
                 '<th>航班号</th>' +
                 '<th>出发机场</th>' +
@@ -192,7 +193,8 @@
               }
               let tBody ='';
               let tds = '';
-              tds='<td>[carrier]</td>'+
+              tds='<td>[flightIndicator]</td>'+
+                '<td>[carrier]</td>'+
                 '<td>[flightNumber]</td>'+
                 '<td>[depAirport]</td>'+
                 '<td>[arrAirport]</td>'+
@@ -201,8 +203,12 @@
                 '<td>[arrTime]</td>';
               for(const i in segmentInfoList){
                 let tr= '<tr>';
-                tr = tr.concat(tds.replace('[carrier]',segmentInfoList[i].carrier)
-                  .replace('[flightNumber]',segmentInfoList[i].flightNumber)
+                tr = tr.concat(tds
+                  .replace('[flightIndicator]',segmentInfoList[i].flightIndicator == 1?"去程":"回程")
+                  .replace('[carrier]',(segmentInfoList[i].carrier) +
+                  (segmentInfoList[i].operatingCarrier != undefined? "("+segmentInfoList[i].operatingCarrier+")":""))
+                  .replace('[flightNumber]',(segmentInfoList[i].flightNumber) +
+                  (segmentInfoList[i].operatingFlightNo != undefined? "("+segmentInfoList[i].operatingFlightNo+")":""))
                   .replace('[depAirport]',segmentInfoList[i].depAirport)
                   .replace('[arrAirport]',segmentInfoList[i].arrAirport)
                   .replace('[cabin]',segmentInfoList[i].cabin)
