@@ -78,7 +78,11 @@
         width="50"
         align="center">
       </el-table-column>
-      <el-table-column label="航段信息" prop="segmentInfo" width="300" />
+      <el-table-column label="航段信息" prop="segmentInfo" width="500" >
+        <template slot-scope="scope">
+          <p v-html='scope.row.segmentInfo'></p>
+        </template>
+      </el-table-column>
       <el-table-column
         v-for="col in cols"
         :prop="col.prop" :label="col.label" >
@@ -162,7 +166,52 @@
             for(const key in list){
               const item = {};
               //航段信息
-              item.segmentInfo = key;
+              item.segmentInfo ='';
+
+              let html = '';
+               html = ' <table>' +
+                '<thead>' +
+                '<tr>' +
+                '<th>航司</th>' +
+                '<th>航班号</th>' +
+                '<th>出发机场</th>' +
+                '<th>抵达机场</th>' +
+                '<th>舱位</th>' +
+                '<th>起飞时间</th>' +
+                '<th>到达时间</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>';
+
+              const segment= list[key].segmentInfo;
+              debugger;
+              const segmentInfoList = segment.fromSegments;
+              const  retSegments =segment.retSegments;
+              if(retSegments.length > 0){
+                segmentInfoList.push(retSegments);
+              }
+              let tBody ='';
+              let tds = '';
+              tds='<td>[carrier]</td>'+
+                '<td>[flightNumber]</td>'+
+                '<td>[depAirport]</td>'+
+                '<td>[arrAirport]</td>'+
+                '<td>[cabin]</td>'+
+                '<td>[depTime]</td>'+
+                '<td>[arrTime]</td>';
+              for(const i in segmentInfoList){
+                let tr= '<tr>';
+                tr = tr.concat(tds.replace('[carrier]',segmentInfoList[i].carrier)
+                  .replace('[flightNumber]',segmentInfoList[i].flightNumber)
+                  .replace('[depAirport]',segmentInfoList[i].depAirport)
+                  .replace('[arrAirport]',segmentInfoList[i].arrAirport)
+                  .replace('[cabin]',segmentInfoList[i].cabin)
+                  .replace('[depTime]',segmentInfoList[i].depTime)
+                  .replace('[arrTime]',segmentInfoList[i].arrTime));
+                tBody = tBody.concat(tr+'</tr>');
+              }
+              const segmentHtml = html + tBody + '</tbody></table>';
+              item.segmentInfo = segmentHtml;
 
               //GDS信息
               const gdsDataList = list[key].gdsInfoVos;
