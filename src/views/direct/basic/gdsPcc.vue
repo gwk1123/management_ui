@@ -153,11 +153,15 @@
         <el-form-item label="PCC结算币种" prop="pccSettlementCurrency">
           <el-input v-model="form.pccSettlementCurrency" placeholder="请输入PCC结算币种" />
         </el-form-item>
-        <el-form-item label="位置" prop="pccPosition">
-          <el-input v-model="form.pccPosition"  placeholder="如中国时区: +8" />
-        </el-form-item>
+<!--        <el-form-item label="位置" prop="pccPosition">-->
+<!--          <el-input v-model="form.pccPosition"  placeholder="请输入" />-->
+<!--        </el-form-item>-->
         <el-form-item label="供应商" prop="pccSupplier">
           <el-input v-model="form.pccSupplier"  placeholder="供应商" />
+        </el-form-item>
+
+        <el-form-item label="时区" prop="timeZone">
+          <el-input v-model="form.timeZone"  placeholder="如中国时区: +8" />
         </el-form-item>
 
         <el-form-item label="状态">
