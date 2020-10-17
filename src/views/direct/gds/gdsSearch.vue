@@ -240,6 +240,8 @@
                 const otaHtmlStr = "<div>"+
                   "<p>"+"票面价: "+otaItem.adultPriceOta+
                   "<br/>"+"税费: "+otaItem.adultTaxOta+
+                  "<br/>"+"明细政策: "+otaItem.policyInfoId+
+                  "<br/>"+"全局政策: "+otaItem.policyGlobalId +
                   "<br/>"+"来源: "+otaItem.gds + '-'+otaItem.pcc +
                   "<br/>"+"行李额: "+otaItem.baggageInfo+"</p>"+
                   "</div>";
