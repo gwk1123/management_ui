@@ -1,3 +1,10 @@
+
+<style>
+  .el-card__header {
+    background-color: #33CCFF;
+  }
+</style>
+
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" v-show="showSearch" :inline="true">
@@ -159,8 +166,12 @@
     <!-- 添加或修改角色配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-       <el-divider>航程信息</el-divider>
 
+        <el-card >
+          <div slot="header" >
+            <span>航程信息</span>
+          </div>
+          <div>
         <el-row>
           <el-col :span="12">
             <el-form-item label="订位GDS系统" prop="bookGdsChannel" label-width="150px">
@@ -359,9 +370,15 @@
             </el-form-item>
           </el-col>
         </el-row>
+       </div>
+      </el-card>
 
 
-        <el-divider>日期信息</el-divider>
+        <el-card >
+          <div slot="header" >
+            <span>日期信息</span>
+          </div>
+          <div>
         <el-row>
           <el-col :span="12">
             <el-form-item label="去程旅行日期" prop="depCityExcept" label-width="150px">
@@ -434,9 +451,15 @@
             </el-form-item>
           </el-col>
         </el-row>
+          </div>
+        </el-card>
 
 
-        <el-divider>运价信息</el-divider>
+        <el-card >
+          <div slot="header" >
+            <span>运价信息</span>
+          </div>
+          <div>
         <el-row>
           <el-col :span="12">
             <el-form-item label="产品类型" prop="productType">
@@ -548,7 +571,14 @@
             </el-form-item>
           </el-col>
         </el-row>
+          </div>
+        </el-card>
 
+        <el-card >
+          <div slot="header" >
+            <span>行李额信息</span>
+          </div>
+          <div>
         <el-row>
           <el-col :span="12">
             <el-form-item label="行李额来源" prop="baggageType" label-width="150px">
@@ -582,6 +612,8 @@
             </el-form-item>
           </el-col>
         </el-row>
+          </div>
+        </el-card>
 
         <el-row>
           <el-col :span="12">
