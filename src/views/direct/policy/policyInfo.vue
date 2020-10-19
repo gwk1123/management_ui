@@ -1,7 +1,7 @@
 
 <style>
   .el-card__header {
-    background-color: #33CCFF;
+    background-color: #D9EDF7;
   }
 </style>
 
